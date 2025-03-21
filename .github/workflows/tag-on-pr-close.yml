@@ -16,11 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set TAG_NAME
+        id: tag_name
+        run: echo "TAG_NAME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
       - name: Create and push tag
-        env:
-          TAG_NAME: $(date +'%Y%m%d%H%M%S')
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo $TAG_NAME
           git tag $TAG_NAME
           git push origin $TAG_NAME
