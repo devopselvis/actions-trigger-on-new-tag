@@ -3,7 +3,7 @@ name: Tag on PR Close
 on:
   pull_request:
     types:
-      -closed
+      - closed
     branches:
       - main
 
