@@ -21,9 +21,11 @@ jobs:
         run: echo "TAG_NAME=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
 
       - name: Create and push tag
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           echo $TAG_NAME
           git tag $TAG_NAME
-          git push origin $TAG_NAME
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git $TAG_NAME
