@@ -12,3 +12,8 @@ jobs:
     steps:
       - name: Say Hello
         run: echo "Hello World"
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
